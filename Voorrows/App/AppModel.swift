@@ -5,7 +5,7 @@ class VooroowsAppModel {
 
     // MARK: - Sub-types
     enum Root: Identifiable {
-        case gameLauncher
+        case gameLauncher(GameLauncherModel)
         case game(GameModel)
         case gameEnded(GameEndedModel)
 
@@ -20,11 +20,14 @@ class VooroowsAppModel {
 
     // MARK: - Init
     init() {
-        self.root = .gameLauncher
+        self.root = .none
+        self.root = gameLauncher()
     }
 
     // MARK: - State properties
-    private(set) var root: Root
+    // TODO: Maxime: Save the difficulty on the device, to keep it accross launches
+    private var currentDifficulty: GameLauncherModel.Difficulty = .medium
+    private(set) var root: Root!
 
     // MARK: - Public actions
     func onStartGame() {
@@ -37,24 +40,31 @@ class VooroowsAppModel {
 
     // MARK:  - Root factories
     private func gameLauncher() -> Root {
-        .gameLauncher
+        .gameLauncher(.init(
+            onPlay: { [weak self] in
+                self?.currentDifficulty = $0
+                self?.root = self?.game()
+            }
+        ))
     }
 
     private func game() -> Root {
         .game(.init(
-            gameFactory: .init(),
+            gameFactory: .init(
+                difficulty: currentDifficulty
+            ),
             onGameEnd: { [weak self] in
                 self?.onGameEnded()
-            })
-        )
+            }
+        ))
     }
 
     private func gameEnded() -> Root {
         .gameEnded(.init(
             onPlayAgain: { [weak self] in
                 self?.onStartGame()
-            })
-        )
+            }
+        ))
     }
 
 }

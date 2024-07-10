@@ -17,15 +17,14 @@ struct VoorrowsApp: App {
     @ViewBuilder
     private var contentView: some View {
         switch model.root {
-        case .gameLauncher:
-            // TODO: Maxime: Replace this when we have the correct view
-            GameEndedView(model: .init(
-                onPlayAgain: model.onStartGame
-            ))
+        case .gameLauncher(let model):
+            GameLauncherView(model: model)
         case .game(let model):
             GameView(model: model)
         case .gameEnded(let model):
             GameEndedView(model: model)
+        case .none:
+            fatalError("This is a developper error and should be caught as soon as possible.")
         }
     }
 }

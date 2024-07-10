@@ -4,15 +4,23 @@ class GameArrowFactory {
 
     // MARK: - Init
     init(
-        lives: Int = 5,
-        trapRate: Int = 30 // Percent
+        difficulty: GameLauncherModel.Difficulty
     ) {
-        self.lives = lives
-        self.trapRate = trapRate
+        switch difficulty {
+        case .easy:
+            self.lives = 10
+            self.trapRate = 30
+        case .medium:
+            self.lives = 5
+            self.trapRate = 50
+        case .hard:
+            self.lives = 3
+            self.trapRate = 70
+        }
     }
 
     // MARK: - Private properties
-    let trapRate: Int
+    let trapRate: Int // Percentage
 
     // MARK: - Public methods
     let lives: Int
