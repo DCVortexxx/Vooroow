@@ -36,7 +36,7 @@ struct GameArrowListView: View {
 
     @ViewBuilder
     private var arrowsView: some View {
-        VStack(spacing: 80) {
+        LazyVStack(spacing: 80) {
             centeringSpacer
             arrowContentViews
             centeringSpacer
@@ -49,7 +49,7 @@ struct GameArrowListView: View {
             GameArrowView(state: i)
                 .scrollTransition { content, phase in
                     content
-                        .opacity(phase.isIdentity ? 1 : 0)
+                        .opacity(phase.isIdentity ? 1 : 0.8)
                         .scaleEffect(phase.isIdentity ? 1 : 0.8)
                         .blur(radius: phase.isIdentity ? 0 : 10)
                 }

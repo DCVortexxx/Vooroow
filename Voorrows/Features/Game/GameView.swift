@@ -7,11 +7,18 @@ struct GameView: View {
 
     // MARK: - View
     var body: some View {
-        GameArrowListView(
-            state: model.list,
-            onSwipe: model.onSwipe
-        )
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        VStack {
+            GameHeaderView(
+                state: model.header
+            )
+            Spacer()
+            GameArrowListView(
+                state: model.list,
+                onSwipe: model.onSwipe
+            )
+            .frame(maxWidth: .infinity)
+            Spacer()
+        }
         .background(.gameBackground)
     }
 

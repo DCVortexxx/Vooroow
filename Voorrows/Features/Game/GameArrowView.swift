@@ -4,7 +4,9 @@ struct GameArrowView: View {
 
     // MARK: - Sub-types
     enum Constants {
-        static let height = 150.0
+        static let content = 120.0
+        static let padding = 30.0
+        static var height: CGFloat { content + padding }
     }
 
     enum Direction: CaseIterable, Identifiable {
@@ -38,7 +40,7 @@ struct GameArrowView: View {
     // MARK: - View
     var body: some View {
         Image(arrow: state.direction)
-            .font(.system(size: Constants.height))
+            .font(.system(size: Constants.content - Constants.padding))
             .shadow(radius: 1, x: 2, y: 2)
             .phaseAnimator(
                 [false, true],
@@ -53,7 +55,7 @@ struct GameArrowView: View {
             .onChange(of: state.validation) {
                 triggerAnimation(validation: $1)
             }
-            .padding(30)
+            .padding(Constants.padding)
             .background(.arrowBackground)
             .clipShape(.circle)
     }
@@ -133,16 +135,15 @@ private extension GameArrowView.Statez {
         case .failed:
             return .init(width: 30, height: 0)
         case .validated:
-            let outOfBounds = GameArrowView.Constants.height * 1.5
             switch expectedDirection {
             case .up:
-                return .init(width: 0, height: -outOfBounds)
+                return .init(width: 0, height: -GameArrowView.Constants.height)
             case .left:
-                return .init(width: -outOfBounds, height: 0)
+                return .init(width: -GameArrowView.Constants.height, height: 0)
             case .right:
-                return .init(width: outOfBounds, height: 0)
+                return .init(width: GameArrowView.Constants.height, height: 0)
             case .down:
-                return .init(width: 0, height: outOfBounds)
+                return .init(width: 0, height: GameArrowView.Constants.height)
             }
         }
     }

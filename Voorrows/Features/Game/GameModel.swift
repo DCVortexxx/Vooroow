@@ -28,6 +28,12 @@ class GameModel {
 
 
     // MARK: - State properties
+    var header: GameHeaderView.Statez {
+        .init(
+            lives: lives
+        )
+    }
+
     var list: GameArrowListView.Statez {
         .init(
             emphasized: currentArrow.id,
