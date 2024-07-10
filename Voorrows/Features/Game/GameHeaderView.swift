@@ -1,5 +1,6 @@
 import SwiftUI
 
+@MainActor
 struct GameHeaderView: View {
 
     // MARK: - Sub-types
@@ -104,13 +105,6 @@ private extension Image {
         .init(systemName: count > 0 ? "heart.circle.fill" : "heart.slash.circle.fill")
     }
 
-    static var score: Image {
-        .init(systemName: "arrowshape.turn.up.right.circle.fill")
-    }
-
-    static var streak: Image {
-        .init(systemName: "flame.circle.fill")
-    }
 }
 
 // MARK: - Previews

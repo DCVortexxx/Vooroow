@@ -1,5 +1,6 @@
 import SwiftUI
 
+@MainActor
 struct GameArrowView: View {
 
     // MARK: - Sub-types

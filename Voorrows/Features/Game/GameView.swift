@@ -1,5 +1,6 @@
 import SwiftUI
 
+@MainActor
 struct GameView: View {
 
     // MARK: - State properties
