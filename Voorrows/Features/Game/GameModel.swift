@@ -10,6 +10,7 @@ class GameModel {
     ) {
         self.lives = gameFactory.lives
         self.score = 0
+        self.streak = 0
         // For this tech test, I'm assuming that nobody will go further than 1k.
         // In a real app context, we would probably add more content dynamically
         // if the user reaches the last few arrows
@@ -23,6 +24,7 @@ class GameModel {
     // MARK: - Private properties
     private var lives: Int
     private var score: Int
+    private var streak: Int
     private var arrows: [GameArrowView.Statez]
     private var currentIndex: Int
     private var currentArrow: GameArrowView.Statez {
@@ -36,7 +38,8 @@ class GameModel {
     var header: GameHeaderView.Statez {
         .init(
             lives: lives,
-            score: score
+            score: score,
+            streak: streak
         )
     }
 
@@ -61,9 +64,11 @@ class GameModel {
     private func validateArrow(_ isValid: Bool) async throws {
         if isValid {
             currentArrow.validation = .validated
+            streak += 1
             score += 1
         } else {
             currentArrow.validation = .failed
+            streak = 0
             lives -= 1
         }
 

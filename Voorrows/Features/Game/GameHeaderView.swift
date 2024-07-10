@@ -6,6 +6,7 @@ struct GameHeaderView: View {
     struct Statez {
         let lives: Int
         let score: Int
+        let streak: Int
     }
 
     // MARK: - State
@@ -15,36 +16,70 @@ struct GameHeaderView: View {
     var body: some View {
         HStack(spacing: 20) {
             Spacer()
-            headerContent(
-                image: .lives(state.lives),
-                value: state.lives.formatted()
-            )
-            .phaseAnimator(
-                [false, true, false],
-                trigger: state.lives,
-                content: {
-                    $0
-                        .scaleEffect($1 ? 1.4 : 1)
-                        .foregroundStyle(
-                            $1 || state.lives <= 0 ? .livesLoss : .white,
-                            .livesBackground
-                        )
-                },
-                animation: { _ in
-                    .bouncy(duration: 0.2)
-                }
-            )
-            headerContent(
-                image: .score,
-                value: state.score.formatted()
-            )
-            .foregroundStyle(.white, .scoreBackground)
+            livesView
+            scoreView
+            streakView
             Spacer()
         }
         .font(.title3.bold())
         .foregroundStyle(.white, .orange)
         .padding()
         .background(.headerBackground)
+    }
+
+    @ViewBuilder
+    private var livesView: some View {
+        headerContent(
+            image: .lives(state.lives),
+            value: state.lives.formatted()
+        )
+        .phaseAnimator(
+            [false, true, false],
+            trigger: state.lives,
+            content: {
+                $0
+                    .scaleEffect($1 ? 1.4 : 1)
+                    .foregroundStyle(
+                        $1 || state.lives <= 0 ? .livesLoss : .white,
+                        .livesBackground
+                    )
+            },
+            animation: { _ in
+                .bouncy(duration: 0.2)
+            }
+        )
+    }
+
+    @ViewBuilder
+    private var scoreView: some View {
+        headerContent(
+            image: .score,
+            value: state.score.formatted()
+        )
+        .foregroundStyle(.white, .scoreBackground)
+    }
+
+    @ViewBuilder
+    private var streakView: some View {
+        headerContent(
+            image: .streak,
+            value: state.streak.formatted()
+        )
+        .phaseAnimator(
+            [false, true, false],
+            trigger: state.streak == 0,
+            content: {
+                $0
+                    .scaleEffect($1 && state.streak == 0 ? 1.4 : 1)
+                    .foregroundStyle(
+                        $1 && state.streak == 0 ? .livesLoss : .white,
+                        .streakBackground
+                    )
+            },
+            animation: { _ in
+                    .bouncy(duration: 0.2)
+            }
+        )
     }
 
     @ViewBuilder
@@ -72,6 +107,10 @@ private extension Image {
     static var score: Image {
         .init(systemName: "arrowshape.turn.up.right.circle.fill")
     }
+
+    static var streak: Image {
+        .init(systemName: "flame.circle.fill")
+    }
 }
 
 // MARK: - Previews
@@ -83,11 +122,13 @@ private struct AnimatablePreview: View {
 
     @State private var lives = 5.0
     @State private var score = 50.0
+    @State private var streak = 8.0
 
     private var state: GameHeaderView.Statez {
         .init(
             lives: Int(lives),
-            score: Int(score)
+            score: Int(score),
+            streak: Int(streak)
         )
     }
 
@@ -112,6 +153,12 @@ private struct AnimatablePreview: View {
                 in: 0...100,
                 step: 1
             ) { Text("Score: \(Int(score))") }
+
+            Stepper(
+                value: $streak,
+                in: 0...100,
+                step: 1
+            ) { Text("Streak: \(Int(streak))") }
 
         }
         .padding()
