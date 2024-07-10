@@ -4,8 +4,10 @@ class GameArrowFactory {
 
     // MARK: - Init
     init(
+        lives: Int = 5,
         trapRate: Int = 30 // Percent
     ) {
+        self.lives = lives
         self.trapRate = trapRate
     }
 
@@ -13,6 +15,8 @@ class GameArrowFactory {
     let trapRate: Int
 
     // MARK: - Public methods
+    let lives: Int
+
     func generate(_ count: Int) -> [GameArrowView.Statez] {
         (0..<count).map { _ in
             .init(

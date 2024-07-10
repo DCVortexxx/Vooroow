@@ -11,6 +11,8 @@ struct GameView: View {
             state: model.list,
             onSwipe: model.onSwipe
         )
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(.gameBackground)
     }
 
 }
@@ -20,6 +22,7 @@ struct GameView: View {
     GameView(
         model: .init(
             gameFactory: .init(
+                lives: 3,
                 trapRate: 80
             )
         )

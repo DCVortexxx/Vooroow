@@ -54,7 +54,7 @@ struct GameArrowView: View {
                 triggerAnimation(validation: $1)
             }
             .padding(30)
-            .background(.arrowBackground.opacity(0.8))
+            .background(.arrowBackground)
             .clipShape(.circle)
     }
 
