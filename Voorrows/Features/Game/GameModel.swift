@@ -9,6 +9,7 @@ class GameModel {
         onGameEnd: @escaping () -> Void
     ) {
         self.lives = gameFactory.lives
+        self.score = 0
         // For this tech test, I'm assuming that nobody will go further than 1k.
         // In a real app context, we would probably add more content dynamically
         // if the user reaches the last few arrows
@@ -19,6 +20,7 @@ class GameModel {
 
     // MARK: - Private properties
     private var lives: Int
+    private var score: Int
     private var arrows: [GameArrowView.Statez]
     private var currentIndex: Int
     private var currentArrow: GameArrowView.Statez {
@@ -31,7 +33,8 @@ class GameModel {
     // MARK: - State properties
     var header: GameHeaderView.Statez {
         .init(
-            lives: lives
+            lives: lives,
+            score: score
         )
     }
 
@@ -49,6 +52,7 @@ class GameModel {
         Task {
             if direction == currentArrow.expectedDirection {
                 currentArrow.validation = .validated
+                score += 1
             } else {
                 currentArrow.validation = .failed
                 lives -= 1

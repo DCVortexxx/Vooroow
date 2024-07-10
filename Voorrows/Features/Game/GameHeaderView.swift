@@ -5,6 +5,7 @@ struct GameHeaderView: View {
     // MARK: - Sub-types
     struct Statez {
         let lives: Int
+        let score: Int
     }
 
     // MARK: - State
@@ -12,7 +13,7 @@ struct GameHeaderView: View {
 
     // MARK: - View
     var body: some View {
-        HStack {
+        HStack(spacing: 20) {
             Spacer()
             headerContent(
                 image: .lives(state.lives),
@@ -22,19 +23,28 @@ struct GameHeaderView: View {
                 [false, true, false],
                 trigger: state.lives,
                 content: {
-                    $0.scaleEffect($1 ? 1.4 : 1)
+                    $0
+                        .scaleEffect($1 ? 1.4 : 1)
+                        .foregroundStyle(
+                            $1 || state.lives <= 0 ? .livesLoss : .white,
+                            .livesBackground
+                        )
                 },
                 animation: { _ in
-                    .bouncy
+                    .bouncy(duration: 0.2)
                 }
             )
+            headerContent(
+                image: .score,
+                value: state.score.formatted()
+            )
+            .foregroundStyle(.white, .scoreBackground)
             Spacer()
         }
         .font(.title3.bold())
         .foregroundStyle(.white, .orange)
         .padding()
         .background(.headerBackground)
-        .animation(.easeInOut, value: state.lives)
     }
 
     @ViewBuilder
@@ -46,6 +56,7 @@ struct GameHeaderView: View {
             image
             Text(value)
                 .monospacedDigit()
+                .animation(.easeOut, value: value)
         }
     }
 
@@ -53,8 +64,13 @@ struct GameHeaderView: View {
 
 // MARK: - Private helpers
 private extension Image {
+
     static func lives(_ count: Int) -> Image {
         .init(systemName: count > 0 ? "heart.circle.fill" : "heart.slash.circle.fill")
+    }
+
+    static var score: Image {
+        .init(systemName: "arrowshape.turn.up.right.circle.fill")
     }
 }
 
@@ -66,10 +82,12 @@ private extension Image {
 private struct AnimatablePreview: View {
 
     @State private var lives = 5.0
+    @State private var score = 50.0
 
     private var state: GameHeaderView.Statez {
         .init(
-            lives: Int(lives)
+            lives: Int(lives),
+            score: Int(score)
         )
     }
 
@@ -88,6 +106,12 @@ private struct AnimatablePreview: View {
                 in: 0...100,
                 step: 1
             ) { Text("Lives: \(Int(lives))") }
+
+            Stepper(
+                value: $score,
+                in: 0...100,
+                step: 1
+            ) { Text("Score: \(Int(score))") }
 
         }
         .padding()
