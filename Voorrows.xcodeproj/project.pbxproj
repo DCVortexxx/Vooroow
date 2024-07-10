@@ -176,10 +176,18 @@
 		9C2FD96A2C3EDF0300E95271 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9C2FD9732C3F1B6600E95271 /* Buttons */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9C2FD9732C3F1B6600E95271 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
 				9C2FD96B2C3EDF2000E95271 /* DefaultButton.swift */,
 				9C2FD96D2C3EE0C400E95271 /* ScalingButton.swift */,
 			);
-			path = Views;
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
