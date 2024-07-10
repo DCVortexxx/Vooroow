@@ -58,6 +58,13 @@ struct GameArrowView: View {
             .onChange(of: state.validation, initial: true) {
                 triggerAnimation(validation: $1)
             }
+            .sensoryFeedback(trigger: state.validation) {
+                switch $1 {
+                case .none, .pending:   return .none
+                case .failed:           return .error
+                case .validated:        return .selection
+                }
+            }
             .padding(Constants.padding)
             .background(background)
             .clipShape(.circle.inset(by: -4))
