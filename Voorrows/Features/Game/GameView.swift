@@ -29,7 +29,7 @@ struct GameView: View {
     GameView(
         model: .init(
             gameFactory: .init(
-                difficulty: .easy
+                difficulty: .hard
             ),
             onGameEnd: { }
         )

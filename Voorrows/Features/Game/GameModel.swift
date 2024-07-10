@@ -16,6 +16,8 @@ class GameModel {
         self.arrows = gameFactory.generate(1_000)
         self.currentIndex = 0
         self.onGameEnd = onGameEnd
+        self.currentArrow.validation = .pending
+        self.scheduleCurrentArrowExpiration()
     }
 
     // MARK: - Private properties
@@ -27,8 +29,8 @@ class GameModel {
         get { arrows[currentIndex] }
         set { arrows[currentIndex] = newValue }
     }
+    private var currentArrowExpiredTask: Task<Void, Error>?
     private let onGameEnd: () -> Void
-
 
     // MARK: - State properties
     var header: GameHeaderView.Statez {
@@ -49,21 +51,37 @@ class GameModel {
     func onSwipe(direction: GameArrowView.Direction) {
         guard lives > 0 else { return }
 
+        currentArrowExpiredTask?.cancel()
         Task {
-            if direction == currentArrow.expectedDirection {
-                currentArrow.validation = .validated
-                score += 1
-            } else {
-                currentArrow.validation = .failed
-                lives -= 1
-            }
-            try await Task.sleep(for: .seconds(0.35))
+            try await validateArrow(direction == currentArrow.expectedDirection)
+        }
+    }
 
-            if lives <= 0 {
-                onGameEnd()
-            } else {
-                currentIndex += 1
-            }
+    // MARK: - Private helpers
+    private func validateArrow(_ isValid: Bool) async throws {
+        if isValid {
+            currentArrow.validation = .validated
+            score += 1
+        } else {
+            currentArrow.validation = .failed
+            lives -= 1
+        }
+
+        try await Task.sleep(for: .seconds(0.35))
+
+        if lives <= 0 {
+            onGameEnd()
+        } else {
+            currentIndex += 1
+            currentArrow.validation = .pending
+            scheduleCurrentArrowExpiration()
+        }
+    }
+
+    private func scheduleCurrentArrowExpiration() {
+        currentArrowExpiredTask = Task {
+            try await Task.sleep(for: .seconds(currentArrow.decisionDuration))
+            try await validateArrow(false)
         }
     }
 

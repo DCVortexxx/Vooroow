@@ -96,56 +96,65 @@ struct GameArrowListView: View {
                 .init(
                     id: .init(),
                     direction: .up,
-                    validation: .none,
-                    isTrap: false
+                    validation: .pending,
+                    isTrap: false,
+                    decisionDuration: 5
                 ),
                 .init(
                     id: .init(),
                     direction: .down,
-                    validation: .none,
-                    isTrap: true
+                    validation: .pending,
+                    isTrap: true,
+                    decisionDuration: 5
                 ),
                 .init(
                     id: .init(),
                     direction: .down,
-                    validation: .none,
-                    isTrap: false
+                    validation: .pending,
+                    isTrap: false,
+                    decisionDuration: 5
                 ),
                 .init(
                     id: .init(),
                     direction: .right,
-                    validation: .none,
-                    isTrap: false
+                    validation: .pending,
+                    isTrap: false,
+                    decisionDuration: 5
                 ),
                 .init(
                     id: .init(),
                     direction: .left,
-                    validation: .none,
-                    isTrap: false
+                    validation: .pending,
+                    isTrap: false,
+                    decisionDuration: 5
                 ),
                 .init(
                     id: .init(),
                     direction: .up,
-                    validation: .none,
-                    isTrap: false
+                    validation: .pending,
+                    isTrap: false,
+                    decisionDuration: 5
                 ),
                 .init(
                     id: .init(),
                     direction: .left,
-                    validation: .none,
-                    isTrap: true
+                    validation: .pending,
+                    isTrap: true,
+                    decisionDuration: 5
                 ),
                 .init(
                     id: .init(),
                     direction: .right,
-                    validation: .none,
-                    isTrap: true
+                    validation: .pending,
+                    isTrap: true,
+                    decisionDuration: 5
                 ),
                 .init(
                     id: .init(),
                     direction: .down,
-                    validation: .none,
-                    isTrap: false
+                    validation: .pending,
+                    isTrap: false,
+                    decisionDuration: 5
                 ),
             ]
         ),

@@ -20,6 +20,7 @@ struct GameArrowView: View {
 
     enum Validation: CaseIterable, Identifiable {
         case none
+        case pending
         case failed
         case validated
 
@@ -31,11 +32,13 @@ struct GameArrowView: View {
         let direction: Direction
         var validation: Validation
         let isTrap: Bool
+        let decisionDuration: TimeInterval
     }
 
     // MARK: - State
     let state: Statez
     @State private var validationAnimation: Validation = .none
+    @State private var durationAnimation: Double = 1.0
 
     // MARK: - View
     var body: some View {
@@ -44,7 +47,7 @@ struct GameArrowView: View {
             .shadow(radius: 1, x: 2, y: 2)
             .phaseAnimator(
                 [false, true],
-                content: { $0.scaleEffect(state.validation == .none && $1 ? 1 : 0.97) },
+                content: { $0.scaleEffect(state.validation == .pending && $1 ? 1 : 0.97) },
                 animation: { _ in .linear(duration: 1) }
             )
             .animation(.bouncy) {
@@ -52,19 +55,44 @@ struct GameArrowView: View {
                     .foregroundStyle(state.foregroundStyle)
                     .offset(state.arrowOffset(for: validationAnimation))
             }
-            .onChange(of: state.validation) {
+            .onChange(of: state.validation, initial: true) {
                 triggerAnimation(validation: $1)
             }
             .padding(Constants.padding)
-            .background(.arrowBackground)
-            .clipShape(.circle)
+            .background(background)
+            .clipShape(.circle.inset(by: -4))
+    }
+
+    @ViewBuilder
+    private var background: some View {
+        ZStack {
+            Circle()
+                .fill(.arrowBackground)
+
+            Circle()
+                .inset(by: -2)
+                .trim(from: 0, to: validationAnimation == .pending ? 0 : 1)
+                .stroke(
+                    .arrowDefault,
+                    style: .init(
+                        lineWidth: 4,
+                        lineCap: .round
+                    )
+                )
+                .rotationEffect(.degrees(-90))
+                .animation(.none) {
+                    $0.opacity(validationAnimation == .pending ? 1 : 0)
+                }
+        }
     }
 
     private func triggerAnimation(validation: Validation) {
         switch validation {
         case .none:
-            withAnimation(.none) {
-                validationAnimation = .none
+            validationAnimation = .none
+        case .pending:
+            withAnimation(.linear(duration: state.decisionDuration)) {
+                validationAnimation = .pending
             }
         case .failed:
             validationAnimation = .failed
@@ -123,14 +151,14 @@ private extension GameArrowView.Statez {
             return .arrowValidated
         case .failed:
             return .arrowFailed
-        case .none:
+        case .none, .pending:
             return isTrap ? .arrowTrap : .arrowDefault
         }
     }
 
     func arrowOffset(for animation: GameArrowView.Validation) -> CGSize {
         switch animation {
-        case .none:
+        case .none, .pending:
             return .zero
         case .failed:
             return .init(width: 30, height: 0)
@@ -160,13 +188,15 @@ private struct AnimatablePreview: View {
     @State private var direction: GameArrowView.Direction = .up
     @State private var validation: GameArrowView.Validation = .none
     @State private var isTrap: Bool = false
+    @State private var decisionDuration: TimeInterval = 5
 
     private var state: GameArrowView.Statez {
         .init(
             id: .init(),
             direction: direction,
             validation: validation,
-            isTrap: isTrap
+            isTrap: isTrap,
+            decisionDuration: decisionDuration
         )
     }
 
@@ -176,7 +206,7 @@ private struct AnimatablePreview: View {
                 state: state
             )
             .padding()
-            .background(.purple)
+            .background(.gameBackground)
 
             Spacer()
 
@@ -195,6 +225,15 @@ private struct AnimatablePreview: View {
             .pickerStyle(.segmented)
 
             Toggle("It's a trap", isOn: $isTrap)
+
+            VStack {
+                LabeledContent("Decision duration", value: decisionDuration.formatted())
+                Slider(
+                    value: $decisionDuration,
+                    in: 1...20,
+                    step: 1
+                )
+            }
         }
         .padding()
         .frame(maxHeight: 400)
