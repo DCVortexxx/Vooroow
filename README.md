@@ -46,3 +46,4 @@ I won't focus on the design (assets, fonts, colors...) here because I've already
 - Draw a graph of your previous results overtime (as does Impulse)
 - Add some sounds in the gameplay
 - Add some fancy [Rive](https://rive.app) or [Lottie](https://lottiefiles.com) animations
+- Fix a glitch when past arrows are going below the header and making it blink 
