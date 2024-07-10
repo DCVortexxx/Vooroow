@@ -6,7 +6,11 @@ struct VoorrowsApp: App {
     // MARK: - View
     var body: some Scene {
         WindowGroup {
-            GameView()
+            GameView(
+                model: .init(
+                    gameFactory: .init()
+                )
+            )
         }
     }
 }
