@@ -1,10 +1,3 @@
-//
-//  Item.swift
-//  Voorrows
-//
-//  Created by Maxime de Chalendar on 10/07/2024.
-//
-
 import Foundation
 import SwiftData
 
