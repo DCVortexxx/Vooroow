@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 @Observable @MainActor
 class GameLauncherModel {
@@ -22,6 +23,7 @@ class GameLauncherModel {
 
     // MARK: - Init
     init(
+        modelContainer: ModelContainer,
         onPlay: @escaping ((Difficulty) -> Void)
     ) {
         self.difficulty = .medium
@@ -43,8 +45,8 @@ class GameLauncherModel {
             )
         ]
         self.onPlayDifficulty = onPlay
-        self.score = 123
-        self.streak = 44
+        self.score = GameResult.bestScore(in: modelContainer.mainContext)
+        self.streak = GameResult.bestStreak(in: modelContainer.mainContext)
     }
 
     // MARK: - Private properties

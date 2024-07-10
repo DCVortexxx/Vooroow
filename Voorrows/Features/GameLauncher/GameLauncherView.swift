@@ -191,6 +191,7 @@ private extension Color {
 #Preview {
     GameLauncherView(
         model: .init(
+            modelContainer: .preview(),
             onPlay: { _ in }
         )
     )

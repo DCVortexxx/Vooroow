@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 @Observable @MainActor
 class VooroowsAppModel {
@@ -24,23 +25,18 @@ class VooroowsAppModel {
         self.root = gameLauncher()
     }
 
-    // MARK: - State properties
+    // MARK: - Private properties
     // TODO: Maxime: Save the difficulty on the device, to keep it accross launches
     private var currentDifficulty: GameLauncherModel.Difficulty = .medium
+    private let modelContainer: ModelContainer = .app()
+
+    // MARK: - State properties
     private(set) var root: Root!
-
-    // MARK: - Public actions
-    func onStartGame() {
-        root = game()
-    }
-
-    func onGameEnded() {
-        root = gameEnded()
-    }
 
     // MARK:  - Root factories
     private func gameLauncher() -> Root {
         .gameLauncher(.init(
+            modelContainer: modelContainer,
             onPlay: { [weak self] in
                 self?.currentDifficulty = $0
                 self?.root = self?.game()
@@ -54,7 +50,7 @@ class VooroowsAppModel {
                 difficulty: currentDifficulty
             ),
             onGameEnd: { [weak self] in
-                self?.onGameEnded()
+                self?.onGameEnded(result: $0)
             }
         ))
     }
@@ -65,6 +61,16 @@ class VooroowsAppModel {
                 self?.onStartGame()
             }
         ))
+    }
+
+    // MARK: - Private actions
+    func onStartGame() {
+        root = game()
+    }
+
+    func onGameEnded(result: GameResult) {
+        result.save(in: modelContainer.mainContext)
+        root = gameEnded()
     }
 
 }

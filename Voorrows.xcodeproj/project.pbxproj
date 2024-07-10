@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		9C2FD9392C3E715D00E95271 /* VoorrowsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD9382C3E715D00E95271 /* VoorrowsApp.swift */; };
 		9C2FD93B2C3E715D00E95271 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD93A2C3E715D00E95271 /* GameView.swift */; };
-		9C2FD93D2C3E715D00E95271 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD93C2C3E715D00E95271 /* Item.swift */; };
+		9C2FD93D2C3E715D00E95271 /* GameResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD93C2C3E715D00E95271 /* GameResult.swift */; };
 		9C2FD93F2C3E715D00E95271 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C2FD93E2C3E715D00E95271 /* Assets.xcassets */; };
 		9C2FD9422C3E715D00E95271 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C2FD9412C3E715D00E95271 /* Preview Assets.xcassets */; };
 		9C2FD94B2C3E738900E95271 /* AppModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD94A2C3E738900E95271 /* AppModelContainer.swift */; };
@@ -27,13 +27,14 @@
 		9C2FD96C2C3EDF2000E95271 /* DefaultButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD96B2C3EDF2000E95271 /* DefaultButton.swift */; };
 		9C2FD96E2C3EE0C400E95271 /* ScalingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD96D2C3EE0C400E95271 /* ScalingButton.swift */; };
 		9C2FD9702C3EF0E900E95271 /* SystemImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD96F2C3EF0E900E95271 /* SystemImages.swift */; };
+		9C2FD9722C3F121F00E95271 /* FetchDescriptors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD9712C3F121F00E95271 /* FetchDescriptors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9C2FD9352C3E715D00E95271 /* Voorrows.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Voorrows.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C2FD9382C3E715D00E95271 /* VoorrowsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoorrowsApp.swift; sourceTree = "<group>"; };
 		9C2FD93A2C3E715D00E95271 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
-		9C2FD93C2C3E715D00E95271 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		9C2FD93C2C3E715D00E95271 /* GameResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameResult.swift; sourceTree = "<group>"; };
 		9C2FD93E2C3E715D00E95271 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9C2FD9412C3E715D00E95271 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9C2FD94A2C3E738900E95271 /* AppModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModelContainer.swift; sourceTree = "<group>"; };
@@ -51,6 +52,7 @@
 		9C2FD96B2C3EDF2000E95271 /* DefaultButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultButton.swift; sourceTree = "<group>"; };
 		9C2FD96D2C3EE0C400E95271 /* ScalingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScalingButton.swift; sourceTree = "<group>"; };
 		9C2FD96F2C3EF0E900E95271 /* SystemImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemImages.swift; sourceTree = "<group>"; };
+		9C2FD9712C3F121F00E95271 /* FetchDescriptors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDescriptors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,7 +116,8 @@
 			children = (
 				9C2FD94D2C3E768100E95271 /* AppSchema.swift */,
 				9C2FD94A2C3E738900E95271 /* AppModelContainer.swift */,
-				9C2FD93C2C3E715D00E95271 /* Item.swift */,
+				9C2FD93C2C3E715D00E95271 /* GameResult.swift */,
+				9C2FD9712C3F121F00E95271 /* FetchDescriptors.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -258,10 +261,11 @@
 				9C2FD96E2C3EE0C400E95271 /* ScalingButton.swift in Sources */,
 				9C2FD95D2C3EAA1500E95271 /* GameHeaderView.swift in Sources */,
 				9C2FD95B2C3E9EB400E95271 /* GameFactory.swift in Sources */,
-				9C2FD93D2C3E715D00E95271 /* Item.swift in Sources */,
+				9C2FD93D2C3E715D00E95271 /* GameResult.swift in Sources */,
 				9C2FD9392C3E715D00E95271 /* VoorrowsApp.swift in Sources */,
 				9C2FD9672C3EBECE00E95271 /* GameLauncherModel.swift in Sources */,
 				9C2FD9702C3EF0E900E95271 /* SystemImages.swift in Sources */,
+				9C2FD9722C3F121F00E95271 /* FetchDescriptors.swift in Sources */,
 				9C2FD9592C3E96CA00E95271 /* GameModel.swift in Sources */,
 				9C2FD9622C3EB68300E95271 /* GameEndedModel.swift in Sources */,
 				9C2FD9572C3E7FD500E95271 /* GameArrowListView.swift in Sources */,

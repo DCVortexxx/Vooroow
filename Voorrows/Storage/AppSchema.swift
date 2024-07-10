@@ -4,7 +4,7 @@ extension Schema {
 
     static func app() -> Schema {
         .init([
-            Item.self
+            GameResult.self
         ])
     }
 

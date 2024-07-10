@@ -32,7 +32,7 @@ struct GameView: View {
             gameFactory: .init(
                 difficulty: .easy
             ),
-            onGameEnd: { }
+            onGameEnd: { _ in }
         )
     )
 }
