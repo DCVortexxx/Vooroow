@@ -2,7 +2,7 @@
 _(It's a mix of Voodoo and Arrows, one of the worst word play I've ever done)_
 
 ### Contact
-First of all, feel free to reach out by mail ([maxime.dechalendar@me.com](mailto:maxime.dechalendar@me.com)) or by phone directly ([+ 33 7 60 98 02 77](tel:+33760980277).  
+First of all, feel free to reach out by mail ([maxime.dechalendar@me.com](mailto:maxime.dechalendar@me.com)) or by phone directly ([+ 33 7 60 98 02 77](tel:+33760980277)).  
 I would be more than happy to discuss about this assignment, and give some context about the project, my thought process and decision making.
 
 ### Product decision
