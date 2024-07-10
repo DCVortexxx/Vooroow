@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ContentView: View {
+struct GameView: View {
 
     // MARK: - View
     var body: some View {
@@ -11,5 +11,5 @@ struct ContentView: View {
 
 // MARK: - Previews
 #Preview {
-    ContentView()
+    GameView()
 }
