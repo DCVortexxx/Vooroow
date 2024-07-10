@@ -3,11 +3,10 @@ import SwiftUI
 @Observable @MainActor
 class GameModel {
 
-    // MARK: - Sub-types
-
     // MARK: - Init
     init(
-        gameFactory: GameArrowFactory
+        gameFactory: GameArrowFactory,
+        onGameEnd: @escaping () -> Void
     ) {
         self.lives = gameFactory.lives
         // For this tech test, I'm assuming that nobody will go further than 1k.
@@ -15,6 +14,7 @@ class GameModel {
         // if the user reaches the last few arrows
         self.arrows = gameFactory.generate(1_000)
         self.currentIndex = 0
+        self.onGameEnd = onGameEnd
     }
 
     // MARK: - Private properties
@@ -25,6 +25,7 @@ class GameModel {
         get { arrows[currentIndex] }
         set { arrows[currentIndex] = newValue }
     }
+    private let onGameEnd: () -> Void
 
 
     // MARK: - State properties
@@ -43,6 +44,8 @@ class GameModel {
 
     // MARK: - Public actions
     func onSwipe(direction: GameArrowView.Direction) {
+        guard lives > 0 else { return }
+
         Task {
             if direction == currentArrow.expectedDirection {
                 currentArrow.validation = .validated
@@ -53,7 +56,7 @@ class GameModel {
             try await Task.sleep(for: .seconds(0.35))
 
             if lives <= 0 {
-                // TODO: Maxime: Reset the game
+                onGameEnd()
             } else {
                 currentIndex += 1
             }

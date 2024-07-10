@@ -31,7 +31,8 @@ struct GameView: View {
             gameFactory: .init(
                 lives: 3,
                 trapRate: 80
-            )
+            ),
+            onGameEnd: { }
         )
     )
 }
