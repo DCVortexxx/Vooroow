@@ -6,28 +6,34 @@ class GameArrowFactory {
     init(
         difficulty: GameLauncherModel.Difficulty
     ) {
-        switch difficulty {
-        case .easy:
-            self.lives = 10
-            self.trapRate = 30
-            self.decisionDuration = 8
-        case .medium:
-            self.lives = 5
-            self.trapRate = 50
-            self.decisionDuration = 4
-        case .hard:
-            self.lives = 3
-            self.trapRate = 70
-            self.decisionDuration = 2.5
-        }
+        self.difficulty = difficulty
     }
 
     // MARK: - Private properties
-    private let trapRate: Int // Percentage
-    private let decisionDuration: TimeInterval
+    private var trapRate: Int { // Percentage
+        switch difficulty {
+        case .easy:     return 10
+        case .medium:   return 30
+        case .hard:     return 50
+        }
+    }
+    private var decisionDuration: TimeInterval {
+        switch difficulty {
+        case .easy:     return 6
+        case .medium:   return 4
+        case .hard:     return 2
+        }
+    }
 
     // MARK: - Public methods
-    let lives: Int
+    let difficulty: GameLauncherModel.Difficulty
+    var lives: Int {
+        switch difficulty {
+        case .easy:     return 10
+        case .medium:   return 5
+        case .hard:     return 3
+        }
+    }
 
     func generate(_ count: Int) -> [GameArrowView.Statez] {
         (0..<count).map { _ in

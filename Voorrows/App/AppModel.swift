@@ -6,9 +6,9 @@ class VooroowsAppModel {
 
     // MARK: - Sub-types
     enum Root: Identifiable {
-        case gameLauncher(GameLauncherModel)
+        case gameLauncher(GameLauncherModel, [MenuBenefitView.Statez])
         case game(GameModel)
-        case gameEnded(GameEndedModel)
+        case gameEnded(GameLauncherModel, [MenuHistoryView.Statez])
 
         var id: Int {
             switch self {
@@ -35,42 +35,72 @@ class VooroowsAppModel {
 
     // MARK:  - Root factories
     private func gameLauncher() -> Root {
-        .gameLauncher(.init(
-            modelContainer: modelContainer,
-            onPlay: { [weak self] in
-                self?.currentDifficulty = $0
-                self?.root = self?.game()
-            }
-        ))
+        .gameLauncher(
+            .init(
+                modelContainer: modelContainer,
+                stats: .init(
+                    title: "Best",
+                    score: GameResult.bestScore(in: modelContainer.mainContext),
+                    streak: GameResult.bestStreak(in: modelContainer.mainContext)
+                ),
+                playAction: "Let's get started!",
+                onPlay: { [weak self] in
+                    self?.onStartGame(difficulty: $0)
+                }
+            ),
+            .all
+        )
     }
 
     private func game() -> Root {
-        .game(.init(
-            gameFactory: .init(
-                difficulty: currentDifficulty
-            ),
-            onGameEnd: { [weak self] in
-                self?.onGameEnded(result: $0)
-            }
-        ))
+        .game(
+            .init(
+                gameFactory: .init(
+                    difficulty: currentDifficulty
+                ),
+                onGameEnd: { [weak self] in
+                    self?.onGameEnded(result: $0)
+                }
+            )
+        )
     }
 
-    private func gameEnded() -> Root {
-        .gameEnded(.init(
-            onPlayAgain: { [weak self] in
-                self?.onStartGame()
-            }
-        ))
+    private func gameEnded(result: GameResult) -> Root {
+        .gameEnded(
+            .init(
+                modelContainer: modelContainer,
+                stats: .init(
+                    title: result.difficulty,
+                    score: result.score,
+                    streak: result.streak
+                ),
+                playAction: "Play again",
+                onPlay: { [weak self] in
+                    self?.onStartGame(difficulty: $0)
+                }
+            ),
+            GameResult
+                .history(in: modelContainer.mainContext)
+                .dropFirst()
+                .map {
+                    .init(
+                        title: "\($0.timestamp.formatted()) - \($0.difficulty)",
+                        score: $0.score,
+                        streak: $0.streak
+                    )
+                }
+        )
     }
 
     // MARK: - Private actions
-    func onStartGame() {
+    func onStartGame(difficulty: GameLauncherModel.Difficulty) {
+        currentDifficulty = difficulty
         root = game()
     }
 
     func onGameEnded(result: GameResult) {
         result.save(in: modelContainer.mainContext)
-        root = gameEnded()
+        root = gameEnded(result: result)
     }
 
 }

@@ -28,6 +28,14 @@
 		9C2FD96E2C3EE0C400E95271 /* ScalingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD96D2C3EE0C400E95271 /* ScalingButton.swift */; };
 		9C2FD9702C3EF0E900E95271 /* SystemImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD96F2C3EF0E900E95271 /* SystemImages.swift */; };
 		9C2FD9722C3F121F00E95271 /* FetchDescriptors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD9712C3F121F00E95271 /* FetchDescriptors.swift */; };
+		9C2FD9762C3F1B9D00E95271 /* MenuHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD9752C3F1B9D00E95271 /* MenuHeaderView.swift */; };
+		9C2FD9782C3F1C2A00E95271 /* MenuLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD9772C3F1C2A00E95271 /* MenuLogoView.swift */; };
+		9C2FD97A2C3F1C8F00E95271 /* MenuStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD9792C3F1C8F00E95271 /* MenuStatsView.swift */; };
+		9C2FD97D2C3F1E8D00E95271 /* MenuBenefitsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD97C2C3F1E8D00E95271 /* MenuBenefitsList.swift */; };
+		9C2FD97F2C3F1FAE00E95271 /* MenuDifficultyPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD97E2C3F1FAE00E95271 /* MenuDifficultyPicker.swift */; };
+		9C2FD9812C3F23A800E95271 /* MenuHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD9802C3F23A800E95271 /* MenuHistoryView.swift */; };
+		9C2FD9832C3F24A700E95271 /* MenuBenefitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD9822C3F24A700E95271 /* MenuBenefitView.swift */; };
+		9C2FD9852C3F26F000E95271 /* MenuHistoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD9842C3F26F000E95271 /* MenuHistoryList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +61,14 @@
 		9C2FD96D2C3EE0C400E95271 /* ScalingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScalingButton.swift; sourceTree = "<group>"; };
 		9C2FD96F2C3EF0E900E95271 /* SystemImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemImages.swift; sourceTree = "<group>"; };
 		9C2FD9712C3F121F00E95271 /* FetchDescriptors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDescriptors.swift; sourceTree = "<group>"; };
+		9C2FD9752C3F1B9D00E95271 /* MenuHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHeaderView.swift; sourceTree = "<group>"; };
+		9C2FD9772C3F1C2A00E95271 /* MenuLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuLogoView.swift; sourceTree = "<group>"; };
+		9C2FD9792C3F1C8F00E95271 /* MenuStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuStatsView.swift; sourceTree = "<group>"; };
+		9C2FD97C2C3F1E8D00E95271 /* MenuBenefitsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBenefitsList.swift; sourceTree = "<group>"; };
+		9C2FD97E2C3F1FAE00E95271 /* MenuDifficultyPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuDifficultyPicker.swift; sourceTree = "<group>"; };
+		9C2FD9802C3F23A800E95271 /* MenuHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHistoryView.swift; sourceTree = "<group>"; };
+		9C2FD9822C3F24A700E95271 /* MenuBenefitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBenefitView.swift; sourceTree = "<group>"; };
+		9C2FD9842C3F26F000E95271 /* MenuHistoryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHistoryList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				9C2FD9732C3F1B6600E95271 /* Buttons */,
+				9C2FD97B2C3F1E7F00E95271 /* Menu */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -188,6 +205,21 @@
 				9C2FD96D2C3EE0C400E95271 /* ScalingButton.swift */,
 			);
 			path = Buttons;
+			sourceTree = "<group>";
+		};
+		9C2FD97B2C3F1E7F00E95271 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				9C2FD9752C3F1B9D00E95271 /* MenuHeaderView.swift */,
+				9C2FD9772C3F1C2A00E95271 /* MenuLogoView.swift */,
+				9C2FD9792C3F1C8F00E95271 /* MenuStatsView.swift */,
+				9C2FD97E2C3F1FAE00E95271 /* MenuDifficultyPicker.swift */,
+				9C2FD97C2C3F1E8D00E95271 /* MenuBenefitsList.swift */,
+				9C2FD9822C3F24A700E95271 /* MenuBenefitView.swift */,
+				9C2FD9842C3F26F000E95271 /* MenuHistoryList.swift */,
+				9C2FD9802C3F23A800E95271 /* MenuHistoryView.swift */,
+			);
+			path = Menu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,10 +295,13 @@
 				9C2FD94E2C3E768100E95271 /* AppSchema.swift in Sources */,
 				9C2FD93B2C3E715D00E95271 /* GameView.swift in Sources */,
 				9C2FD9692C3EBEF600E95271 /* GameLauncherView.swift in Sources */,
+				9C2FD97F2C3F1FAE00E95271 /* MenuDifficultyPicker.swift in Sources */,
 				9C2FD95F2C3EB5B600E95271 /* AppModel.swift in Sources */,
 				9C2FD9642C3EB6D100E95271 /* GameEndedView.swift in Sources */,
 				9C2FD9532C3E7BAB00E95271 /* GameArrowView.swift in Sources */,
+				9C2FD9782C3F1C2A00E95271 /* MenuLogoView.swift in Sources */,
 				9C2FD96E2C3EE0C400E95271 /* ScalingButton.swift in Sources */,
+				9C2FD9832C3F24A700E95271 /* MenuBenefitView.swift in Sources */,
 				9C2FD95D2C3EAA1500E95271 /* GameHeaderView.swift in Sources */,
 				9C2FD95B2C3E9EB400E95271 /* GameFactory.swift in Sources */,
 				9C2FD93D2C3E715D00E95271 /* GameResult.swift in Sources */,
@@ -275,10 +310,15 @@
 				9C2FD9702C3EF0E900E95271 /* SystemImages.swift in Sources */,
 				9C2FD9722C3F121F00E95271 /* FetchDescriptors.swift in Sources */,
 				9C2FD9592C3E96CA00E95271 /* GameModel.swift in Sources */,
+				9C2FD9852C3F26F000E95271 /* MenuHistoryList.swift in Sources */,
+				9C2FD9762C3F1B9D00E95271 /* MenuHeaderView.swift in Sources */,
 				9C2FD9622C3EB68300E95271 /* GameEndedModel.swift in Sources */,
 				9C2FD9572C3E7FD500E95271 /* GameArrowListView.swift in Sources */,
+				9C2FD97A2C3F1C8F00E95271 /* MenuStatsView.swift in Sources */,
 				9C2FD94B2C3E738900E95271 /* AppModelContainer.swift in Sources */,
 				9C2FD96C2C3EDF2000E95271 /* DefaultButton.swift in Sources */,
+				9C2FD9812C3F23A800E95271 /* MenuHistoryView.swift in Sources */,
+				9C2FD97D2C3F1E8D00E95271 /* MenuBenefitsList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,6 +8,7 @@ class GameModel {
         gameFactory: GameArrowFactory,
         onGameEnd: @escaping (GameResult) -> Void
     ) {
+        self.difficulty = gameFactory.difficulty
         self.lives = gameFactory.lives
         self.score = 0
         self.streak = 0
@@ -23,6 +24,7 @@ class GameModel {
     }
 
     // MARK: - Private properties
+    private var difficulty: GameLauncherModel.Difficulty
     private var lives: Int
     private var score: Int
     private var streak: Int
@@ -79,6 +81,7 @@ class GameModel {
 
         if lives <= 0 {
             onGameEnd(.init(
+                difficulty: "\(difficulty)".capitalized,
                 score: score,
                 streak: bestStreak
             ))
